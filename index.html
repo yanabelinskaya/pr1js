@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Js</title>
+</head>
+<body>
+    <script>
+
+        // №1 Определить сколько раз каждый элемент встречается в массиве.
+        const fruits = ['яблоко', 'яблоко', 'киви', 'банан', 'киви', 'яблоко'];
+        const fruitCounts = {};
+
+        fruits.forEach(fruit => {
+        fruitCounts[fruit] = (fruitCounts[fruit] || 0) + 1;
+        });
+
+        document.writeln('<b>Количество повторений каждого элемента в массиве:</b><br>');
+        Object.keys(fruitCounts).forEach(key => {
+        document.writeln(`${key}: ${fruitCounts[key]}`);
+        });
+
+
+
+        // №2 Создать массив, содержащий только уникальные значения исходного массива.
+
+        // Используя конструктор Set
+        const uniqueFruitsSet = new Set(fruits);
+        const uniqueFruitsArray = Array.from(uniqueFruitsSet);
+
+        document.writeln('<br><br><b>Массив с уникальными значениями (с использованием Set):</b><br>');
+        uniqueFruitsArray.forEach(fruit => {
+        document.writeln(`${fruit}<br>`);
+        });
+
+        // Используя метод forEach и объект для отслеживания уникальных значений
+        const uniqueFruitsObj = {};
+        const uniqueFruitsArray2 = [];
+
+        fruits.forEach(fruit => {
+        if (!uniqueFruitsObj[fruit]) {
+            uniqueFruitsObj[fruit] = true;
+            uniqueFruitsArray2.push(fruit);
+        }
+        });
+
+        document.writeln('<br><b>Массив с уникальными значениями (с использованием forEach и объекта):</b><br>');
+        uniqueFruitsArray2.forEach(fruit => {
+        document.writeln(`${fruit}<br>`);
+        });
+
+
+
+        // №3 Создать функцию, которая группирует студентов по возрасту.
+        const students = [
+        { name: 'alex', age: 25 },
+        { name: 'mike', age: 24 },
+        { name: 'masha', age: 29 },
+        { name: 'will', age: 11 },
+        ];
+
+        function groupStudentsByAge(students) {
+            const groupedByAge = {};
+
+        students.forEach(student => {
+            const { age, name } = student;
+            if (!groupedByAge[age]) {
+            groupedByAge[age] = [name];
+            } else {
+            groupedByAge[age].push(name);
+            }
+        });
+
+        return groupedByAge;
+        }
+
+        const groupedStudents = groupStudentsByAge(students);
+        document.writeln('<br><b>Студенты, сгруппированные по возрасту:</b><br>');
+        for (const age in groupedStudents) {
+        document.writeln(`Возраст ${age}: ${groupedStudents[age].join(', ')}<br>`);
+        }
+
+
+        // №4 Функция, которая находит пару чисел в массиве, сумма которых равна заданному числу.
+        function findPair(numbers, targetSum) {
+        const pairs = [];
+
+        for (let i = 0; i < numbers.length; i++) {
+            for (let j = i + 1; j < numbers.length; j++) {
+            if (numbers[i] + numbers[j] === targetSum) {
+                pairs.push([numbers[i], numbers[j]]);
+            }
+            }
+        }
+
+        return pairs.length > 0 ? pairs : [];
+        }
+
+        // Пример использования:
+        const uniqueNumbers = [1, 2, 3, 4, 5];
+        const targetSum = 9;
+        const result = findPair(uniqueNumbers, targetSum);
+
+        document.writeln('<br><b>Результаты:</b><br>');
+        if (result.length > 0) {
+        result.forEach(pair => {
+            document.writeln(`${pair[0]}, ${pair[1]}`);
+        });
+        } else {
+        document.writeln('Пустой массив');
+        }
+
+    </script>
+</body>
+</html>
